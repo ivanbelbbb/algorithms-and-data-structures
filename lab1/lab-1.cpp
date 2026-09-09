@@ -1,13 +1,13 @@
 #include <iostream>
+#include <limits>
 void module_arr( int n, int* arr);
 int null_count(int zero_counter);
-
+int input();
 
 int main()
 {
-    int n = 0;
-    std::cout << "Введите кол-во элементов массива: ";
-    std::cin >> n;
+    std::cout << "Введите кол-во элементов массива ";
+    int n = input();
 
     srand(time(NULL));
 
@@ -33,20 +33,36 @@ int main()
     1)Заменить все отрицательные значения элементов на модули их значений O(n)\n \
     2)Подсчитать количество элементов с нулевым значением O(1)\n" ;
 
-    int ans;
-    std::cin >> ans;
+    int ans= input();
 
     if (ans == 1) {
         module_arr(n, arr);
-        std::cout << "Замена проведена";
+        std::cout << "\nЗамена проведена\n";
     }   else if (ans == 2) {
         std::cout << "Количество нулей: " << null_count(zero) << std::endl;
     } else {
-        std::cout << "Вы ввели неверное значение";
+        std::cout << "Нету функции под номером " << ans << "\n";
         return 1;
     }
     return 0;
 }
+int input() {
+    int n;
+    std::cout << "Введите число: ";
+    
+    while (true) {
+        std::cin >> n;
+        
+        if (std::cin.fail()) {
+            std::cout << "Введите число (n must be integer): ";
+            std::cin.clear(); 
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
+        } else {
+            return n;
+        }
+    }
+}
+
 
 void module_arr( int n, int* arr){
     for (int i=0; i < n; i++){
